@@ -18,16 +18,9 @@ class Pig
         return
       else
         @players.push Player.new(input)
-        player_to_open_game(input)
+        OpenGame.add_player_to_open_game(input, @players)
       end
     end
-  end
-
-  def player_to_open_game(name)
-    OpenGame.create(name: name, score: 0)
-    hold_this = OpenGame.select('id').last
-    @players[@players.count - 1].add_id(hold_this.id)
-    puts @players[@players.count - 1].id
   end
 
   def play_round
@@ -65,7 +58,7 @@ class Pig
         if gets.chomp.downcase == "n"
           puts "Stopping with #{turn_total} for the turn."
           player.score += turn_total
-          OpenGame.where(id: player.id).update_all(score: player.score)
+          OpenGame.store_current_game(player)
           player.score
           return
         end
