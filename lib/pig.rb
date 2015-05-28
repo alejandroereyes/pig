@@ -5,7 +5,7 @@ require_relative './leaderboard'
 class Pig
   def initialize
     @players   = []
-    @max_score = 20 #change back to 100 after debugging
+    @max_score = 10 #change back to 100 after debugging
     @current_game = OpenGame.new
   end
 
@@ -66,6 +66,7 @@ class Pig
           puts "Stopping with #{turn_total} for the turn."
           player.score += turn_total
           OpenGame.where(id: player.id).update_all(score: player.score)
+          player.score
           return
         end
       end
