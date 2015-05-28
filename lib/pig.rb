@@ -5,8 +5,8 @@ require_relative './leaderboard'
 class Pig
   def initialize
     @players   = []
-    @max_score = 100
-    @open_game = OpenGame.new
+    @max_score = 20 #change back to 100 after debugging
+    @current_game = OpenGame.new
   end
 
   def get_players
@@ -24,7 +24,10 @@ class Pig
   end
 
   def player_to_open_game(name)
-    OpenGame.create(name: name)
+    OpenGame.create(name: name, score: 0)
+    hold_this = OpenGame.select('id').last
+    @players[@players.count - 1].add_id(hold_this.id)
+    puts @players[@players.count - 1].id
   end
 
   def play_round
@@ -62,6 +65,7 @@ class Pig
         if gets.chomp.downcase == "n"
           puts "Stopping with #{turn_total} for the turn."
           player.score += turn_total
+          OpenGame.where(id: player.id).update_all(score: player.score)
           return
         end
       end
