@@ -1,9 +1,12 @@
 require_relative './player'
+require_relative './open_game'
+require_relative './leaderboard'
 
 class Pig
   def initialize
     @players   = []
     @max_score = 100
+    @open_game = OpenGame.new
   end
 
   def get_players
@@ -15,8 +18,13 @@ class Pig
         return
       else
         @players.push Player.new(input)
+        player_to_open_game(input)
       end
     end
+  end
+
+  def player_to_open_game(name)
+    OpenGame.create(name: name)
   end
 
   def play_round

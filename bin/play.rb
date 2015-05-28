@@ -1,3 +1,4 @@
+require_relative '../db/setup'
 require_relative '../lib/pig'
 require_relative '../lib/hog'
 

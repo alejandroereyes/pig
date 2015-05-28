@@ -1,4 +1,4 @@
-class OpenGame < ActiveRecord::Migration
+class CreateOpenGame < ActiveRecord::Migration
   def change
     create_table :open_games do |t|
       t.string  :name
