@@ -2,6 +2,7 @@ require_relative '../db/setup'
 require_relative '../lib/pig'
 require_relative '../lib/hog'
 require_relative '../lib/leaderboard'
+require_relative '../lib/player_stat'
 
 def select_from(hash)
   loop do
@@ -36,6 +37,7 @@ if game_class != Leaderboard
 
   game.play_round until game.winner
   Leaderboard.store_winner(game.winner)
+  PlayerStat.store_win_for_player(game.winner)
   puts "#{game.winner.name} wins!"
 elsif game_class == Leaderboard
   Leaderboard.top_players

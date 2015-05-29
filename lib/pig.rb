@@ -34,6 +34,7 @@ class Pig
 
   def remove_losing_players!
     if @players.any? { |p| p.score > @max_score }
+      # get players with scores > @max_score autoincrement
       max_score = @players.map { |p| p.score }.max
       @players = @players.select { |p| p.score == max_score }
     end
