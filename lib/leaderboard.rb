@@ -4,8 +4,9 @@ class Leaderboard < ActiveRecord::Base
     all_winners = Leaderboard.group(:name).sum(:score)
     puts ""
     puts "TOP PLAYERS"
+    puts "***********"
+    puts "Name  Score"
     puts "-----------"
-    puts ""
     all_winners.sort_by{ |k, v| v}.reverse.take(5).each { |pair| puts pair.join(" - ")}
   end
 
