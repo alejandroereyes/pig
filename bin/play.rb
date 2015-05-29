@@ -22,17 +22,21 @@ end
 #Pig and Hog are class constants
 game_classes = {
   1 => Pig,
-  2 => Hog
+  2 => Hog,
+  3 => Leaderboard
 }
-
 game_class = select_from(game_classes)
+if game_class != Leaderboard
 
-puts "Playing a game of #{game_class}"
-game = game_class.new
-#       ^ game class is either Pig or Hog. The constant of a class can be assigned to a local variable and be used like any other local variable
+  puts "Playing a game of #{game_class}"
+  game = game_class.new
+  #       ^ game class is either Pig or Hog. The constant of a class can be assigned to a local variable and be used like any other local variable
 
-game.get_players
+  game.get_players
 
-game.play_round until game.winner
-Leaderboard.store_winner(game.winner)
-puts "#{game.winner.name} wins!"
+  game.play_round until game.winner
+  Leaderboard.store_winner(game.winner)
+  puts "#{game.winner.name} wins!"
+elsif game_class == Leaderboard
+  Leaderboard.top_players
+end
