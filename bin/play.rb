@@ -24,10 +24,11 @@ end
 game_classes = {
   1 => Pig,
   2 => Hog,
-  3 => Leaderboard
+  3 => Leaderboard,
+  4 => PlayerStat
 }
 game_class = select_from(game_classes)
-if game_class != Leaderboard
+if game_class != Leaderboard && game_class != PlayerStat
 
   puts "Playing a game of #{game_class}"
   game = game_class.new
@@ -41,4 +42,6 @@ if game_class != Leaderboard
   puts "#{game.winner.name} wins!"
 elsif game_class == Leaderboard
   Leaderboard.top_players
+elsif game_class == PlayerStat
+  PlayerStat.display_stats
 end
