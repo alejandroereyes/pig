@@ -11,10 +11,10 @@ class PlayerStat < ActiveRecord::Base
 
   def self.store_loss_for_player(player)
     if PlayerStat.exists?(name: player.name)
-      current = PlayerStat.where(name: winner.name).sum(:losses)
-      PlayerStat.where(name: winner.name).update_all(losses: current + 1)
+      current = PlayerStat.where(name: player.name).sum(:losses)
+      PlayerStat.where(name: player.name).update_all(losses: current + 1)
     else
-      PlayerStat.create(name: winner.name, losses: 1)
+      PlayerStat.create(name: player.name, losses: 1)
     end
   end
 end
