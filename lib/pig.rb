@@ -29,7 +29,15 @@ class Pig
       gets
       take_turn p
     end
+    get_losers
     remove_losing_players!
+  end
+
+  def get_losers
+    if @players.any? { |p| p.score > @max_score }
+      losers = @players.sort_by { |p| p.score }.take(@players.count - 1)
+      losers.each { |p| PlayerStat.store_loss_for_player(p) }
+    end
   end
 
   def remove_losing_players!
