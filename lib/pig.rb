@@ -6,7 +6,6 @@ class Pig
   def initialize
     @players   = []
     @max_score = 10 #change back to 100 after debugging
-    @current_game = OpenGame.new
   end
 
   def get_players
@@ -18,7 +17,7 @@ class Pig
         return
       else
         @players.push Player.new(input)
-        OpenGame.add_player_to_open_game(input, @players)
+        # OpenGame.add_player_to_open_game(input, @players)
       end
     end
   end
@@ -67,7 +66,7 @@ class Pig
         if gets.chomp.downcase == "n"
           puts "Stopping with #{turn_total} for the turn."
           player.score += turn_total
-          OpenGame.store_current_game(player)
+          # OpenGame.store_current_game(player)
           player.score
           return
         end
